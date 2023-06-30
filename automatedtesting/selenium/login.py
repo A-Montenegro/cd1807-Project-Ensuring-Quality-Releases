@@ -10,7 +10,9 @@ def login (user, password):
     # options = ChromeOptions()
     # options.add_argument("--headless") 
     # driver = webdriver.Chrome(options=options)
-    driver = webdriver.Chrome()
+    options = ChromeOptions()
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    driver = webdriver.Chrome(options=options)
     print ('Browser started successfully. Navigating to the demo page to login.')
     driver.get('https://www.saucedemo.com/')
 
