@@ -101,10 +101,12 @@ stages:
 #--------------------------------------------#    
     # Postman - Install Newman    
     # ToDo: Update the command and verify the working directory
-    - task: CmdLine@2
+    - task: Bash@3
       displayName: Install Newman
       inputs:
-        script: 'sudo npm install -g newman'
+        targetType: 'inline'
+        script: |
+          npm install -g newman
         workingDirectory: $(System.DefaultWorkingDirectory)
     # Postman Data Validation Test Suite    
     # ToDo: Verify the working directory
