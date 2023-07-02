@@ -106,14 +106,12 @@ stages:
       inputs:
         script: 'npm install newman'
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-    # Postman Data Validation Test Suite    
-    # ToDo: Verify the working directory
 
     - task: CmdLine@2
       displayName: Run Data Validation Tests
       continueOnError: true
       inputs:
-        script: 'newman run TestSuite.Data-Validation.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
+        script: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/node_modules/.bin/newman run TestSuite.Data-Validation.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman Regression Test Suite    
     # ToDo: Verify the working directory
