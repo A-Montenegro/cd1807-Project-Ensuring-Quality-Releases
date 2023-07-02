@@ -115,7 +115,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls -l $(System.DefaultWorkingDirectory)
+          ls -l $(System.DefaultWorkingDirectory)/automatedtesting
     - task: CmdLine@2
       displayName: Run Data Validation Tests
       continueOnError: true
