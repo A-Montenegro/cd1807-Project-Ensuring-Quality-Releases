@@ -78,6 +78,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
+        arguments: '-lock=false'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
