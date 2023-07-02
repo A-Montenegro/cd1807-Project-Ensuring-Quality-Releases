@@ -76,7 +76,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls -l $(System.DefaultWorkingDirectory)/terraform/environments/test
+          ls -l $(System.DefaultWorkingDirectory)
     
     # Run Terraform Apply
     - task: TerraformCLI@0
@@ -101,13 +101,21 @@ stages:
 #--------------------------------------------#    
     # Postman - Install Newman    
     # ToDo: Update the command and verify the working directory
-    - task: CmdLine@2
+    - task: Bash@3
       displayName: Install Newman
       inputs:
-        script: 'sudo npm install -g newman'
+        targetType: 'inline'
+        script: |
+          npm install newman
         workingDirectory: $(System.DefaultWorkingDirectory)
     # Postman Data Validation Test Suite    
     # ToDo: Verify the working directory
+    - task: Bash@3
+      displayName: 'List files'
+      inputs:
+        targetType: 'inline'
+        script: |
+          ls -l $(System.DefaultWorkingDirectory)/automatedtesting
     - task: CmdLine@2
       displayName: Run Data Validation Tests
       continueOnError: true
@@ -217,7 +225,7 @@ stages:
   - deployment: VMDeploy
     displayName: Selenium Tests
     environment:
-      name: 'selenium tests'      # ToDo: Change/provide a name
+      name: 'test'      # ToDo: Change/provide a name
       resourceType: VirtualMachine
       tags: selenium
     strategy:
