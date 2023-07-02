@@ -115,7 +115,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls -l $(System.DefaultWorkingDirectory)/automatedtesting/postman
+          ls -l $(System.DefaultWorkingDirectory)
     - task: CmdLine@2
       displayName: Run Data Validation Tests
       continueOnError: true
