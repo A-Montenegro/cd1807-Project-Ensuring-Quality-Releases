@@ -71,6 +71,12 @@ stages:
     #  inputs:
     #   secureFile: 
 
+    - task: Bash@3
+      displayName: 'List files'
+      inputs:
+        targetType: 'inline'
+        script: |
+          ls -l $(System.DefaultWorkingDirectory)/terraform/environments/test
     
     # Run Terraform Apply
     - task: TerraformCLI@0
