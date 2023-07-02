@@ -76,7 +76,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls -l $(System.DefaultWorkingDirectory)/terraform/environments/test
+          ls -l $(System.DefaultWorkingDirectory)
     
     # Run Terraform Apply
     - task: TerraformCLI@0
