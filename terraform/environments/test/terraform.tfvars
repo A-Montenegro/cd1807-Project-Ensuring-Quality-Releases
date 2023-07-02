@@ -6,7 +6,7 @@ client_secret   = "HlW8Q~Zfzzl6ZPSut3SUOoIZTdgWFJvQNx4MociR"
 
 # Resource Group/Location
 location = "eastus"
-resource_group_name = "resource_group_1"
+resource_group = "resource_group_1"
 application_type = "montenegroApplication"
 
 # Network
