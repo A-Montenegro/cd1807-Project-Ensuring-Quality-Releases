@@ -190,7 +190,7 @@ stages:
   - deployment: FakeRestAPI
     pool:
       vmImage: 'Ubuntu-18.04'      
-    environment: test   # ToDo
+    environment: linux-test   # ToDo
     strategy:
       runOnce:
         deploy:
@@ -220,7 +220,7 @@ stages:
   - deployment: VMDeploy
     displayName: Selenium Tests
     environment:
-      name: 'test'      # ToDo: Change/provide a name
+      name: 'linux-test'      # ToDo: Change/provide a name
       resourceType: VirtualMachine
       tags: selenium
     strategy:
