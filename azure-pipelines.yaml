@@ -224,7 +224,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - download: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip
+          - download: $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip
             displayName: 'Download UI Tests Artifact'
             
           - task: Bash@3
