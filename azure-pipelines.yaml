@@ -224,8 +224,8 @@ stages:
       runOnce:
         deploy:
           steps:
-          - download: current
-            artifact: drop-ui-tests     # ToDo: Change/provide a name
+          - download: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip
+          displayName: 'Download UI Tests Artifact'
             
           - task: Bash@3
             inputs:
