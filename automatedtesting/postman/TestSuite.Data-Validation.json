@@ -13,11 +13,12 @@
           "script": {
             "id": "38b1717c-45ae-477f-8dae-8e889ba381d5",
             "exec": [
-              "pm.test(\"Successful response\", function () {",
-              "    pm.expect(pm.response.text()).to.include(\"success\");",
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
               "});",
-              "var json = pm.response.json();",
-              "pm.environment.set(\"id\", json.data.id);"
+              "pm.test(\"Error message is correct\", function () {",
+              "    pm.expect(pm.response.text()).to.include(\"Error Occured! Page Not found\");",
+              "});"
             ],
             "type": "text/javascript"
           }
