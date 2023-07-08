@@ -220,7 +220,6 @@ stages:
     environment:
       name: 'linux-test'      # ToDo: Change/provide a name
       resourceType: VirtualMachine
-      tags: selenium
     strategy:
       runOnce:
         deploy:
