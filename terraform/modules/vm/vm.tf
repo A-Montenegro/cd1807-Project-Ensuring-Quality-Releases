@@ -12,7 +12,7 @@ resource "azurerm_network_interface" "" {
 }
 
 resource "azurerm_linux_virtual_machine" "" {
-  name                = "vm1"
+  name                = "linux-test"
   location            = "eastus"
   resource_group_name = "resource_group_1"
   size                = "Standard_DS2_v2"
