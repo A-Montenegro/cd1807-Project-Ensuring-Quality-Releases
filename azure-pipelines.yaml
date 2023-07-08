@@ -225,7 +225,7 @@ stages:
         deploy:
           steps:
           - download: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip
-          displayName: 'Download UI Tests Artifact'
+            displayName: 'Download UI Tests Artifact'
             
           - task: Bash@3
             inputs:
