@@ -1,6 +1,5 @@
-from flask import Flask, jsonify, request
-
-app = Flask(__name__)
+import json
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 employees = [
     {
@@ -27,29 +26,55 @@ employees = [
     }
 ]
 
-@app.route("/api/v1/employees", methods=["GET"])
-def get_employees():
-    return jsonify({
-        "status": "success",
-        "data": employees,
-        "message": "Successfully! All records have been fetched."
-    })
+class RequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/api/v1/employees":
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            
+            response = {
+                "status": "success",
+                "data": employees,
+                "message": "Successfully! All records have been fetched."
+            }
+            
+            self.wfile.write(json.dumps(response).encode())
+        else:
+            self.send_response(404)
+            self.end_headers()
 
-@app.route("/api/v1/create", methods=["POST"])
-def create_employee():
-    data = request.get_json()
-    new_employee = {
-        "name": data["name"],
-        "salary": data["salary"],
-        "age": data["age"],
-        "id": 1511
-    }
-    employees.append(new_employee)
-    return jsonify({
-        "status": "success",
-        "data": new_employee,
-        "message": "Successfully! Record has been added."
-    })
+    def do_POST(self):
+        if self.path == "/api/v1/create":
+            content_length = int(self.headers["Content-Length"])
+            data = self.rfile.read(content_length)
+            json_data = json.loads(data.decode())
+            
+            new_employee = {
+                "name": json_data["name"],
+                "salary": json_data["salary"],
+                "age": json_data["age"],
+                "id": 1511
+            }
+            employees.append(new_employee)
+            
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            
+            response = {
+                "status": "success",
+                "data": new_employee,
+                "message": "Successfully! Record has been added."
+            }
+            
+            self.wfile.write(json.dumps(response).encode())
+        else:
+            self.send_response(404)
+            self.end_headers()
 
 if __name__ == "__main__":
-    app.run()
+    server_address = ("", 8000)
+    httpd = HTTPServer(server_address, RequestHandler)
+    print("Server running on http://localhost:8000")
+    httpd.serve_forever()
