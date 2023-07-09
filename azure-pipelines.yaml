@@ -196,7 +196,7 @@ stages:
           steps:
           - task: UsePythonVersion@0
             inputs:
-              versionSpec: '3.8.10'
+              versionSpec: '3.11.4'
               addToPath: true
 
           - script: |
