@@ -74,7 +74,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
 if __name__ == "__main__":
-    server_address = ("", 8000)
+    server_address = ("", 80)
     httpd = HTTPServer(server_address, RequestHandler)
     print("Server running on http://localhost:8000")
     httpd.serve_forever()
