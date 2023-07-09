@@ -153,13 +153,17 @@ stages:
     #--------------------------------------------#    
     # FakeRestAPI - Archive
     # ToDo: Complete the ArchiveFiles@2 task and publish step 
-    - task: ArchiveFiles@2
-      displayName: 'Archive FakeRestAPI'
+    - task: UsePythonVersion@0
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/fakerestapi/bin'
-        includeRootFolder: true
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
+        versionSpec: '$(python.version)'
+        addToPath: true
+    
+    - script: |
+        python -m pip install --upgrade pip
+        pip install pyminifier
+        pyminifier --obfuscate --gzip $(System.DefaultWorkingDirectory)/fakerestapi.py -o $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+      displayName: 'Create Python Zip'
+    
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
@@ -199,8 +203,7 @@ stages:
               azureSubscription: 'myServiceConnection'     # ToDo
               appName: 'montenegroApplication-AppService'               # ToDo
               appType: python
-              package: '$(System.DefaultWorkingDirectory)/fakerestapi.py'       # ToDo: Use the published zip artifact. 
-          #--------------------------------------------#    
+              package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'       # ToDo: Use the published zip artifact.           #--------------------------------------------#    
           # Run JMeter test suite against the App Service
           - task: CmdLine@2
             inputs:
