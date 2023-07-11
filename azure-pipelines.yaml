@@ -216,6 +216,28 @@ stages:
                 ./apache-jmeter-5.6/bin/jmeter -n -t PerformanceTestSuite.jmx -j jmeter.log -f
                 cat jmeter.log                                                                           # ToDo: Write your commands
               workingDirectory: '$(Pipeline.Workspace)/drop-perftests'             # ToDo: Use the artifact name from the task above
+
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/TEST-*.xml'
+              searchFolder: '$(System.DefaultWorkingDirectory)'
+              mergeTestResults: true
+
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: 'Cobertura'
+              summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+              reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+
+          - task: PublishHTML@1
+            displayName: 'Publish HTML Reports'
+            inputs:
+              htmlType: 'folder'
+              folderPath: '$(System.DefaultWorkingDirectory)/html-reports'
+              reportName: 'Performance Test Report'
+              reportTitle: 'Performance Test Report'
+              publishArtifact: true
               
   #--------------------------------------------#  
   # Selenium | Functional UI Tests
