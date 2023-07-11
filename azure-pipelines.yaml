@@ -230,7 +230,7 @@ stages:
               summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
               reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
 
-          - task: PublishHTML@1
+          - task: publishhtmlreport@1
             displayName: 'Publish HTML Reports'
             inputs:
               htmlType: 'folder'
