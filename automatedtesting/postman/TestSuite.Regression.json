@@ -82,7 +82,7 @@
           "path": [
             "api",
             "v1",
-            "employee"
+            "employees"
           ]
         }
       },
