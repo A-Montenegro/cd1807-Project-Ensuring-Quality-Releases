@@ -13,8 +13,8 @@
           "script": {
             "id": "a47a17e8-3e08-4be3-9cb9-47c1b6d3223f",
             "exec": [
-              "pm.test(\"Successful response\", function () {",
-              "    pm.expect(pm.response.text()).to.include(\"success\");",
+              "pm.test(\"Error response\", function () {",
+              "    pm.expect(pm.response.text()).to.include(\"Error Occured! Page Not found, contact rstapi2example@gmail.com\");",
               "});"
             ],
             "type": "text/javascript"
@@ -51,7 +51,7 @@
       "response": []
     },
     {
-      "name": "Get Employee Details",
+      "name": "Get Employees",
       "event": [
         {
           "listen": "test",
@@ -72,7 +72,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://dummy.restapiexample.com/api/v1/employee/{{id}}",
+          "raw": "http://dummy.restapiexample.com/api/v1/employee",
           "protocol": "http",
           "host": [
             "dummy",
@@ -82,8 +82,7 @@
           "path": [
             "api",
             "v1",
-            "employee",
-            "{{id}}"
+            "employee"
           ]
         }
       },
