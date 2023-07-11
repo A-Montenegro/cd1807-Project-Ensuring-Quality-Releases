@@ -72,7 +72,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://dummy.restapiexample.com/api/v1/employee",
+          "raw": "http://dummy.restapiexample.com/api/v1/employees",
           "protocol": "http",
           "host": [
             "dummy",
