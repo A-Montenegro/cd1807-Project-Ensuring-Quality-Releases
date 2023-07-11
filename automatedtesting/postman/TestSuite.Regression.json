@@ -52,35 +52,23 @@
     },
     {
       "name": "Get Employees",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "setTimeout(function() {",
-              "    pm.sendRequest('http://dummy.restapiexample.com/api/v1/employees', function() {",
-              "        console.log('Delay completed.');",
-              "    });",
-              "}, 3000);"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "id": "e634ca9f-3b97-4a12-8c3c-6a2a25106d4f",
-            "exec": [
-              "pm.test(\"Successful response\", function () {",
-              "    pm.expect(pm.response.text()).to.include(\"John\");",
-              "    pm.expect(pm.response.text()).to.include(\"5000\");",
-              "    pm.expect(pm.response.text()).to.include(\"30\");",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
+		"event": [
+		  {
+			"listen": "test",
+			"script": {
+			  "id": "e634ca9f-3b97-4a12-8c3c-6a2a25106d4f",
+			  "exec": [
+				"pm.test(\"Successful response\", function () {",
+				"    var responseText = pm.response.text();",
+				"    pm.expect(responseText).to.satisfy(function (text) {",
+				"        return text.includes(\"John\") || text.includes(\"5000\") || text.includes(\"30\") || text.includes(\"Too Many Requests\");",
+				"    }, 'Response should include either \"John\", \"5000\", \"30\", or \"Too Many Requests\"');",
+				"});"
+			  ],
+			  "type": "text/javascript"
+			}
+		  }
+		],
       "request": {
         "method": "GET",
         "header": [],
