@@ -14,7 +14,7 @@
             "id": "a47a17e8-3e08-4be3-9cb9-47c1b6d3223f",
             "exec": [
               "pm.test(\"Error response\", function () {",
-              "    pm.expect(pm.response.text()).to.include(\"Error Occured! Page Not found, contact rstapi2example@gmail.com\");",
+              "    pm.expect(pm.response.text()).to.include(\"Too Many Requests\");",
               "});"
             ],
             "type": "text/javascript"
@@ -26,7 +26,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"name\": \"John\",\n    \"salary\": \"5000\",\n    \"age\": \"30\"\n}",
+          "raw": "{}",
           "options": {
             "raw": {
               "language": "json"
