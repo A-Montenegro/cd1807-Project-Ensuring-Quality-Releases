@@ -220,8 +220,8 @@ stages:
           - task: PublishTestResults@2
             inputs:
               testResultsFormat: 'JUnit'
-              testResultsFiles: '**/jmeter.log'
-              searchFolder: '$(System.DefaultWorkingDirectory)'
+              testResultsFiles: 'jmeter.log'
+              searchFolder: /home/azureuser/azagent/_work/1/drop-perftests
               mergeTestResults: true
 
           - task: PublishCodeCoverageResults@1
