@@ -18,3 +18,11 @@ def login (user, password):
 
 login('standard_user', 'secret_sauce')
 
+element = driver.find_element_by_css_selector("app_logo")
+
+# Validate the element
+if element:
+    print("Element found!")
+else:
+    print("Element not found!")
+

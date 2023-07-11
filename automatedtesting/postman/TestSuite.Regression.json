@@ -14,7 +14,7 @@
             "id": "a47a17e8-3e08-4be3-9cb9-47c1b6d3223f",
             "exec": [
               "pm.test(\"Error response\", function () {",
-              "    pm.expect(pm.response.text()).to.include(\"Too Many Requests\");",
+              "    pm.expect(pm.response.text()).to.include(\"Error Occured! Page Not found, contact rstapi2example@gmail.com\");",
               "});"
             ],
             "type": "text/javascript"
@@ -53,6 +53,19 @@
     {
       "name": "Get Employees",
       "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "setTimeout(function() {",
+              "    pm.sendRequest('http://dummy.restapiexample.com/api/v1/employees', function() {",
+              "        console.log('Delay completed.');",
+              "    });",
+              "}, 3000);"
+            ],
+            "type": "text/javascript"
+          }
+        },
         {
           "listen": "test",
           "script": {
